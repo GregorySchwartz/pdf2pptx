@@ -1,4 +1,8 @@
 # pdf2pptx
+
+Same as https://github.com/ashafaei/pdf2pptx but with the option to use inkscape
+instead of imagemagick.
+
 Convert your (Beamer) PDF slides to (Powerpoint) PPTX
 
 So you don't like using Powerpoint and would rather use Latex/Beamer to make your slides,

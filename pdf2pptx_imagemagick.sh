@@ -2,7 +2,7 @@
 # Alireza Shafaei - shafaei@cs.ubc.ca - Jan 2016
 
 resolution=1024
-density=600
+density=300
 #colorspace="-depth 8"
 colorspace="-colorspace sRGB -background white -alpha remove"
 makeWide=true
@@ -30,9 +30,7 @@ if [ -d "$tempname" ]; then
 fi
 
 mkdir "$tempname"
-pdftk "$1" burst output "$tempname"/slide-%d.pdf
-l=$(ls "$tempname"/*.pdf)
-for i in $l; do inkscape "$i" --pdf-poppler --export-dpi=$density -C -o "${i%.*}.png"; done
+convert -density $density $colorspace -resize "x${resolution}" "$1" "$tempname"/slide.png
 
 if [ $? -eq 0 ]; then
 	echo "Extraction succ!"
@@ -100,7 +98,7 @@ function make_slide {
 
 pushd "$pptname"/ppt/media/
 count=`ls -ltr | wc -l`
-for (( slide=$count-1; slide>0; slide-- ))
+for (( slide=$count-2; slide>=0; slide-- ))
 do
 	echo "Processing "$slide
 	make_slide $slide
